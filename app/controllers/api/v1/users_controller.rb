@@ -36,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
       # Update access and refresh tokens
       @user.update(access_token: auth_params['access_token'], refresh_token: auth_params['refresh_token'])
 
-      redirect_to "http://localhost:3000"
+      redirect_to "http://localhost:3000/?username=#{@user.username}"
     end
   end
 end
