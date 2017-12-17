@@ -1,7 +1,8 @@
 class Api::V1::SearchController < ApplicationController
+  before_action :authenticate_user!
+
   def new
-    user = User.find_by username: 'rick_rieta'
-    response = SpotifyApiHelper.search(user, params[:q], params[:type])
+    response = SpotifyApiHelper.search(current_user, params[:q], params[:type])
     render json: { data: response }
   end
 end
