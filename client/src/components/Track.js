@@ -1,11 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const Track = ({ trackId, name }) => {
+const Track = ({ artist, name, uri }) => {
   return (
-    <li>
-      <Link to={`/tracks/${trackId}`}>{name}</Link>
-    </li>
+    <div>
+      <div>
+        <p>{`${artist} - ${name}`}</p>
+        {uri ? <iframe src={`https://open.spotify.com/embed?uri=${uri}`} title={name} /> : ""}
+      </div>
+      <div>
+        <button>Save To My Tracks</button>
+      </div>
+    </div>
   )
 }
 

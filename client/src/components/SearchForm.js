@@ -1,5 +1,5 @@
 import React from 'react';
-import { authHeaders } from '../helpers/auth';
+import { search } from '../helpers/spotify';
 
 export default class SearchForm extends React.Component {
   constructor(props) {
@@ -24,25 +24,14 @@ export default class SearchForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
     const { searchValue } = this.state;
     const { token, type } = this.props;
-    const headers = authHeaders(token);
 
-    fetch(`/api/v1/search?q=${encodeURI(searchValue)}&type=${encodeURI(type)}`, { headers })
-    .then((response) => {
-      return response.json();
-    })
-    .then(({data}) => {
-      const typeKey = `${type}s`;
-      const { items } = data[typeKey];
-      return items;
-    })
-    .then((items) => {
-      this.props.handleSubmitCallback(items);
-    })
+    const items = await search(token, searchValue, type);
+    this.props.handleSubmitCallback(items);
   }
 
   render() {
