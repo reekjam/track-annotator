@@ -1,12 +1,12 @@
 import React from 'react';
+import { authHeaders } from '../helpers/auth';
 
 export default class SearchForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      searchValue: '',
-      type: ''
+      searchValue: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -15,9 +15,7 @@ export default class SearchForm extends React.Component {
   }
 
   handleClick(e) {
-    this.setState({
-      type: e.target.value
-    });
+    this.props.handleClickCallback(e.target.value);
   }
 
   handleChange(e) {
@@ -28,9 +26,12 @@ export default class SearchForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { searchValue, type } = this.state;
-    
-    fetch(`/api/v1/search?q=${encodeURI(searchValue)}&type=${encodeURI(type)}`, {accept: 'application/json'})
+
+    const { searchValue } = this.state;
+    const { token, type } = this.props;
+    const headers = authHeaders(token);
+
+    fetch(`/api/v1/search?q=${encodeURI(searchValue)}&type=${encodeURI(type)}`, { headers })
     .then((response) => {
       return response.json();
     })
@@ -46,6 +47,7 @@ export default class SearchForm extends React.Component {
 
   render() {
     const { searchValue } = this.state;
+    const { type } = this.props;
 
     return (
       <div className='search'>
@@ -53,10 +55,24 @@ export default class SearchForm extends React.Component {
           <input type='text' onChange={this.handleChange} value={searchValue} />
 
           <label htmlFor='artist'>Artist</label>
-          <input type='radio' id='artist' name='type' onClick={this.handleClick} value='artist' />
+          <input
+            defaultChecked={type === 'artist'}
+            type='radio'
+            id='artist'
+            name='type'
+            onClick={this.handleClick}
+            value='artist'
+            />
 
           <label htmlFor='track'>Track</label>
-          <input type='radio' id='track' name='type' onClick={this.handleClick} value='track' />
+          <input
+            defaultChecked={type === 'track'}
+            type='radio'
+            id='track'
+            name='type'
+            onClick={this.handleClick}
+            value='track'
+            />
 
           <button type='submit'>Search</button>
         </form>

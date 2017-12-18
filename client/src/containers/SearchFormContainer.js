@@ -1,7 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../actions/searchActions';
+import {
+  updateSearchResults,
+  updateSearchType,
+ } from '../actions/searchActions';
 import SearchForm from '../components/SearchForm';
 import SearchResults from '../components/SearchResults';
 
@@ -9,8 +12,18 @@ class SearchFormContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SearchForm handleSubmitCallback={this.props.updateSearchResults}/>
-        <SearchResults results={this.props.results} />
+        <SearchForm
+          handleClickCallback={this.props.updateSearchType}
+          handleSubmitCallback={this.props.updateSearchResults}
+          token={this.props.token}
+          type={this.props.type}
+          />
+        <ul>
+          <SearchResults
+            results={this.props.results}
+            type={this.props.type}
+            />
+        </ul>
       </React.Fragment>
     )
   }
@@ -18,13 +31,15 @@ class SearchFormContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    results: state.search.results
+    results: state.search.results,
+    type: state.search.type,
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    updateSearchResults
+    updateSearchResults,
+    updateSearchType,
   }, dispatch)
 }
 

@@ -1,4 +1,5 @@
 export default (state = {
+  spotifyToken: '',
   username: ''
 }, action) => {
   switch (action.type) {

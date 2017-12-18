@@ -13,7 +13,7 @@ class SpotifyApiHelper
       type: type
     }
 
-    url = "#{api_url}?#{query_params.to_query}&type=artist"
+    url = "#{api_url}?#{query_params.to_query}"
 
     response = HTTParty.get(url, :headers => headers)
     results = JSON.parse(response.body)
