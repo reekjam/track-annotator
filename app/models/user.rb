@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :tracks
+  
   def access_token_expired?
     # Spotify token expires every hour (3600)
     (Time.now - self.updated_at) > 3300
