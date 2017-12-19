@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       end
       get '/login', to: 'login#create'
       get '/users', to: 'users#create'
+
+      resources :tracks, only: [:index, :create, :destroy]
     end
   end
 end

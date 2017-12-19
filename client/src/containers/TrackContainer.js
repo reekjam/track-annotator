@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getTrack } from '../helpers/spotify';
 import { setTrack } from '../actions/trackActions';
+import { saveUserTrack } from '../helpers/api';
 import Track from '../components/Track';
 
 class TrackContainer extends React.Component {
@@ -10,8 +11,13 @@ class TrackContainer extends React.Component {
     const track = await getTrack(this.props.token, this.props.match.params.id);
     this.props.setTrack(track);
   }
+
   render() {
-    return <Track {...this.props} />
+    return (
+      <Track
+        {...this.props}
+        clickHandlerCallback={saveUserTrack} />
+    )
   }
 }
 

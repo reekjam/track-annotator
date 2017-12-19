@@ -11,6 +11,9 @@ const NavLinks = () => (
         <Link to="/search">Search</Link>
       </li>
       <li>
+        <Link to="/my-tracks">My Tracks</Link>
+      </li>
+      <li>
         <Link to="/sign-out">Sign Out</Link>
       </li>
     </ul>
