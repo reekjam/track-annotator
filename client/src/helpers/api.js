@@ -17,7 +17,8 @@ export function saveUserTrack(token, payload) {
     track: {
       artist: payload.artist,
       name: payload.name,
-      spotify_uri: payload.uri,
+      spotify_id: payload.spotifyId,
+      spotify_uri: payload.spotifyUri,
     }
   }
 
@@ -28,8 +29,5 @@ export function saveUserTrack(token, payload) {
   })
   .then((response) => {
     return response.json();
-  })
-  .then(({data}) => {
-    return data
   })
 }

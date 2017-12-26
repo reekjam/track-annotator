@@ -4,7 +4,8 @@ export function setTrack(track) {
     payload: {
       artist: track.artists[0].name,
       name: track.name,
-      uri: track.uri
+      spotifyId: track.id,
+      spotifyUri: track.uri
     }
   };
 }

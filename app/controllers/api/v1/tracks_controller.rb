@@ -6,19 +6,20 @@ class Api::V1::TracksController < ApplicationController
   end
 
   def create
-    track = current_user.tracks.create(
-      artist: params[:track][:artist],
-      name: params[:track][:name],
-      spotify_uri: params[:track][:spotify_uri]
-    )
-
-    if track
-      render json: { data: track }
+    track = current_user.tracks.new(track_params)
+    if track.save
+      render json: { track: track, message: "Track saved", status: 200 }
     else
-      render json: { error: track.errors }
+      render json: { message: track.errors.to_a, status: 422 }
     end
   end
 
   def destroy
+  end
+
+  private
+
+  def track_params
+    params.require(:track).permit(:artist, :name, :spotify_id, :spotify_uri)
   end
 end

@@ -1,15 +1,12 @@
 export default (state = {
   artist: '',
   name: '',
-  uri: '',
+  spotifyId: '',
+  spotifyUri: '',
 }, action) => {
   switch (action.type) {
     case ("SET_TRACK"):
-      return Object.assign({}, state, {
-        artist: action.payload.artist,
-        name: action.payload.name,
-        uri: action.payload.uri,
-      });
+      return Object.assign({}, state, {...action.payload});
     default:
       return state;
   }
