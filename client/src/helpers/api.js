@@ -6,9 +6,6 @@ export function getUserTracks(token) {
   .then((response) => {
     return response.json();
   })
-  .then(({data}) => {
-    return data;
-  })
 }
 
 export function saveUserTrack(token, payload) {

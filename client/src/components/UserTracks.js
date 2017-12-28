@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 
 function renderTracks(tracks) {
   return tracks.map((track) => {
-    return <Link to={`/my-tracks/${track.id}`}>{`${track.artist} - ${track.name}`}</Link>
+    return (
+      <div key={track.id}>
+        <Link to={`/my-tracks/${track.id}`}>{`${track.artist} - ${track.name}`}</Link>
+      </div>
+    )
   })
 }
 

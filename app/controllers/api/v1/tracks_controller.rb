@@ -2,7 +2,7 @@ class Api::V1::TracksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render json: { tracks: current_user.tracks }
+    render json: { tracks: current_user.tracks, status: 200 }
   end
 
   def create
