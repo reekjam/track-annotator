@@ -5,6 +5,7 @@ import SearchFormContainer from '../containers/SearchFormContainer';
 import AlbumContainer from '../containers/AlbumContainer';
 import ArtistAlbumsContainer from '../containers/ArtistAlbumsContainer';
 import TrackContainer from '../containers/TrackContainer';
+import UserTrackContainer from '../containers/UserTrackContainer';
 import UserTracksContainer from '../containers/UserTracksContainer';
 
 export default class Main extends React.Component {
@@ -16,6 +17,7 @@ export default class Main extends React.Component {
         <Route exact path="/albums/:id" render={(props) => <AlbumContainer token={this.props.token} {...props} />} />
         <Route exact path="/artists/:id/albums" render={(props) => <ArtistAlbumsContainer token={this.props.token} {...props} />} />
         <Route exact path="/my-tracks" render={(props) => <UserTracksContainer token={this.props.token} {...props} />} />
+        <Route exact path="/my-tracks/:id" render={(props) => <UserTrackContainer token={this.props.token} {...props} />} />
         <Route exact path="/tracks/:id" render={(props) => <TrackContainer token={this.props.token} {...props} />} />
       </div>
     );

@@ -12,3 +12,9 @@ export default (state = {
       return state;
   }
 }
+
+export const getCurrentTrack = (state, id) => {
+  return state.find((track) => {
+    return track.id == id;
+  });
+}
